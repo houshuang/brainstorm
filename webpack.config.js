@@ -17,21 +17,26 @@ var common = {
   },
   module: {
     loaders: [
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css']
-      }
+      { test: /\.css$/, loaders: ['style', 'css'] },
+      { test: /\.woff$/,   loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.woff2$/,   loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf$/,    loader: "file-loader" },
+      { test: /\.eot$/,    loader: "file-loader" },
+      { test: /\.svg$/,    loader: "file-loader" }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Kanban app'
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      "windows.jQuery": 'jquery'
     })
   ]
 };
 
 if(TARGET === 'build') {
   module.exports = merge(common, {
+    output: { publicPath: "/brainstorm/" },
     devtool: 'source-map',
     module: {
       loaders: [
@@ -43,6 +48,8 @@ if(TARGET === 'build') {
       ]
     },
     plugins: [
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           // This has effect on the react lib size
@@ -69,9 +76,9 @@ if(TARGET === 'dev') {
         {
           test: /\.jsx?$/,
           loaders: ['react-hot', 'babel?stage=1'],
-          include: path.resolve(ROOT_PATH, 'app'),
-        },
-      ],
-    },
+          include: path.resolve(ROOT_PATH, 'app')
+        }
+      ]
+    }
   });
 }
