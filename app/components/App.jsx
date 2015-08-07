@@ -41,12 +41,10 @@ export default class App extends React.Component {
   }
   render() {
     const ideas = R.sortBy(R.compose(R.negate, R.prop('score')), this.state.dbstate);
-
     return (
       <div>
       <PageHeader>Ideas</PageHeader>
-<p>Let's brainstorm some approaches for using tablets and smart phones in inquiry lessons, within our SIG. Include applications like Kahoot, Socrative, Twitter and Nearpod, where students' ideas are collected at the front of the room, as well as recording, mapping, and fitness applications.</p>
-  <p>Add your ideas below, and comment on other people's ideas. You can also upvote the ideas you find the most interesting/relevant to your SIG (click the heart). </p>
+      <div dangerouslySetInnerHTML={{__html: this.state.userstate.intro}} />
       <TextInput
         placeholder={'Enter a new idea and press Enter to submit'}
         minLength={10}
