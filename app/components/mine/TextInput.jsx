@@ -38,9 +38,10 @@ export default class TextInput extends React.Component {
     this.setState({text: e.target.value});
   }
   localchange(e) {
+    const {minLength=0} = this.props
     if(e.key === 'Enter') {
       e.preventDefault();
-      if(this.state.text.length > 10) {
+      if(!(minLength > 0 && this.state.text.length < minLength)) {
         let val = e.target.value;
         this.setState({text: ''});
         this.props.onEnter(val);

@@ -30,9 +30,6 @@ export default class Idea extends React.Component {
     {this.props.value} </font><i>({this.props.nick}</i>)
     &nbsp;&nbsp;&nbsp;
 
-
-
-
       <a href="#" onClick={(e) => {
         this.setState({comment: !this.state.comment})
         e.preventDefault() }}>
@@ -43,9 +40,27 @@ export default class Idea extends React.Component {
         minLength={10}
         onEnter={this.procComment} />)
         : ''}
-
+        { this.props.admin ? this.archiveButton() : "" }
         </div>
         </div>;
+  }
+  archiveButton() {
+    return(
+      <span>
+      <a href="#" onClick={(e) => {
+        this.props.archive(this.props.id)
+        e.preventDefault() }}>
+        &nbsp;
+        &nbsp;
+        <Button bsSize='xsmall' bsStyle='success'>archive</Button></a>
+        &nbsp;&nbsp;
+      <a href="#" onClick={(e) => {
+        this.props.trash(this.props.id)
+        e.preventDefault() }}>
+        &nbsp;
+        <Button bsSize='xsmall' bsStyle='success'>trash</Button></a>
+        </span>
+    )
   }
 
   procComment(value) {

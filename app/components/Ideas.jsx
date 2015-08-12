@@ -26,7 +26,7 @@ export default class Ideas extends React.Component {
       <ListGroupItem className='item' key={`item${i}`}>
         <Idea
           value={item.idea} score={item.score} id={item.id} nick={item.user_nick}
-          vote={this.props.vote} comment={this.props.comment}/>
+          vote={this.props.vote} comment={this.props.comment} archive={this.props.archive} admin={this.props.admin} trash={this.props.trash}/>
           {comments}
       </ListGroupItem>
     );

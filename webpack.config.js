@@ -36,13 +36,13 @@ var common = {
 
 if(TARGET === 'build') {
   module.exports = merge(common, {
-    output: { publicPath: "/brainstorm/" },
+    output: { publicPath: "/live/" },
     devtool: 'source-map',
     module: {
       loaders: [
         {
           test: /\.jsx?$/,
-          loader: 'babel?stage=1',
+          loader: 'babel?stage=0',
           include: path.resolve(ROOT_PATH, 'app')
         }
       ]
