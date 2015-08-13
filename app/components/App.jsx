@@ -82,8 +82,6 @@ export default class App extends React.Component {
   render() {
     const ideas = R.sortBy(R.compose(R.negate, R.prop('score')), this.state.dbstate);
     const idea_status = R.groupBy((idea) => idea.archived, ideas)
-    var chatStyle = { float: 'left', maxWidth: '320px' }
-    var ideaStyle = { float: 'right', maxWidth: '480px' }
     return (
       <div className='container-fluid'>
       <PageHeader>{ this.state.userstate.title }</PageHeader>
@@ -92,11 +90,12 @@ export default class App extends React.Component {
       <Presence items={this.state.users_online} />
       <div className='row'>
 
-      <div style={chatStyle}>
+      <div className='col-xs-4'>
       { this.state.userstate.chat_enabled ?
       <ChatForm chats={this.state.chats} say={this.say}/>
       : "" }
-      </div><div style={ideaStyle}>
+      </div>
+      <div className='col-xs-8'>
       <TextInput
         placeholder={'Enter a new idea and press Enter to submit'}
         minLength={10}
