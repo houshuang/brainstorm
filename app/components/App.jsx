@@ -82,12 +82,12 @@ export default class App extends React.Component {
   render() {
     const ideas = R.sortBy(R.compose(R.negate, R.prop('score')), this.state.dbstate);
     const idea_status = R.groupBy((idea) => idea.archived, ideas)
-    var chatStyle = { float: 'left' }
-    var ideaStyle = { float: 'right', maxWidth: '400px' }
+    var chatStyle = { float: 'left', maxWidth: '320px' }
+    var ideaStyle = { float: 'right', maxWidth: '480px' }
     return (
       <div className='container-fluid'>
       <PageHeader>{ this.state.userstate.title }</PageHeader>
-      { this.state.userstate.admin ? <div dangerouslySetInnerHTML={{__html: this.state.userstate.embed }} /> : "" }
+      <iframe width="560" height="315" src={ this.state.userstate.embed } frameBorder="0" allowFullScreen></iframe>
      <br />
       <Presence items={this.state.users_online} />
       <div className='row'>
